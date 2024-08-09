@@ -15,6 +15,9 @@ export default function Home() {
 
     useFiles(uploadFiles)
   }
+  useEffect(()=>{
+    handleFilesUpload();
+  },[])
 
   return (
     <div className={styles.container}>
@@ -23,7 +26,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        hola
+
         <input type="file" onChange={handleFilesUpload} />
         <CuentaDeCobro files={files}/>
       </main>
