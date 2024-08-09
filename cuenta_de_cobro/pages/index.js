@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import globalStyle from "../styles/global.module.scss"
+import st from "../styles/global.module.scss"
+
 import CuentaDeCobro from '/components/CuentaDeCobro';
 import InputGenerator from '../components/InputGenerator';
 
@@ -23,19 +24,19 @@ export default function Home() {
   },[])
 
   return (
-    <div className={globalStyle.container}>
+    <div>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <div >
+      <main >
+        <div className={[st.container].join(" ")}>
           <div className='input-section'>  
-            <label className={globalStyle.title} >Algun formato en especifico?</label>
+            <label className="title" >Algun formato en especifico?</label>
             <input type="file" onChange={handleFilesUpload} />
             <InputGenerator/>
           </div>
-          <div className='result-section'>
+          <div className={[st.result_section].join(" ")}>
             <div className='hoja'>
               <CuentaDeCobro files={files}/>
             </div>

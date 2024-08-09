@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import st from "../styles/global.module.scss"
 import mammoth from 'mammoth';
 
 const CuentaDeCobro = ({ files }) => {
@@ -52,18 +53,10 @@ const CuentaDeCobro = ({ files }) => {
   }, [files]);
 
   return (
-    <div>
+    <div >
       <div id="result1">
         <h2>HTML Content:</h2>
-        <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-      </div>
-      <div id="result2">
-        <h2>Raw Text Content:</h2>
-        <pre>{rawTextContent}</pre>
-      </div>
-      <div id="result3">
-        <h2>Markdown Content:</h2>
-        <pre>{markdownContent}</pre>
+        <div className={[st.paper].join(" ")} dangerouslySetInnerHTML={{ __html: htmlContent }} />
       </div>
     </div>
   );

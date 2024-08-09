@@ -1,6 +1,9 @@
-$color-primary: blue;
-@import "./input-section.scss";
+@import "./scss_styles/variables.scss";
+@import "./scss_styles/mixins.scss";
+@import "./scss_styles/globals.scss";
+@import "./scss_styles/input-section.scss";
+@import "./scss_styles/render-section.scss";
 
-.title{
-  color: $color-primary;
-}
+
+
+

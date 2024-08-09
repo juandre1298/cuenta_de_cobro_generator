@@ -1,0 +1,11 @@
+.result_section{
+  width: 900px;
+  .paper{
+    width: 815px;
+    border: solid 1px gray;
+    padding: 90px 70px;
+    *{
+      border: 1px red dashed;
+    }
+  }
+}

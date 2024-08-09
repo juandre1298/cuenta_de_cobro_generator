@@ -25,6 +25,7 @@ a {
 
 * {
   box-sizing: border-box;
+  border: red 1px solid;
 }
 
 img {
