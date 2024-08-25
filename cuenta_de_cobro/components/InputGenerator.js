@@ -1,12 +1,18 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import { handleDownload } from '../services/doc_service.js';
 
+const InputGenerator = ({ inputList }) => {
 
-const InputGenerator = ({  }) => {
-  
   return (
     <div>
-      input generator
+      {inputList.length > 0 &&
+        inputList.map((e,i) =>(<div>
+          {console.log(i+" element "+e)}
+          {e}
+        </div>)
+        )
+      }
     </div>
   );
 };
