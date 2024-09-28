@@ -15,13 +15,10 @@ export default async function handler(req, res) {
       //   mimeType: "text/plain"
       // }
       // const uploadResp = await uploadFile(fileInfo,authResp);
-      // console.log(uploadResp)
       // await textReplacement(authResp);
       // const copyInfo = await makeAcopy("1YQ2y6UYsxR_Ft9y_Zx-Xn6oMBGVXVQmYbI6HA6OOuo8","NEW COPY");
-      // console.log(copyInfo);
 
       const inputLink = await getInputList("1YQ2y6UYsxR_Ft9y_Zx-Xn6oMBGVXVQmYbI6HA6OOuo8");
-      console.log(inputLink);
       res.status(200).json({ message: 'successfull.' })
 
     } catch (error) {

@@ -37,7 +37,6 @@ export async function changeDocText(documentId, requestData) {
 
 export function downloadDocxFromGoogleDocs(googleDocsUrl) {
   // Extract the FILE_ID from the Google Docs URL
-  console.log(googleDocsUrl)
   const fileIdMatch = googleDocsUrl.match(/\/document\/d\/(.*?)\/edit/);
   
   if (!fileIdMatch || !fileIdMatch[1]) {

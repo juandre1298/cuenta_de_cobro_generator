@@ -19,7 +19,6 @@ export default async function handler(req, res) {
     case 'PUT':
       try {
         const requestData=req.body;
-        console.log("put request",requestData)
         const inputList = await replaceContent(id,requestData);
         if(inputList){
           res.status(200).json({ message: 'successfull.' });

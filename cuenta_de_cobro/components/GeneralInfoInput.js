@@ -75,9 +75,7 @@ const GeneralInfoInput = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("submit click", docList);
-  
+    e.preventDefault(); 
     const updatedDocList = await Promise.all(
       docList.map(async (docElement) => {
         const driveId = driveURLIdExtractor(docElement.link);
@@ -88,9 +86,7 @@ const GeneralInfoInput = () => {
         };
       })
     );
-  
     setDocList(updatedDocList);
-    console.log("Updated docList:", updatedDocList);
   };
   
 

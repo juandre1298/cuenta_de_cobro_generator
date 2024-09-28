@@ -44,7 +44,6 @@ export async function printDocTitle(auth = authResp) {
   const res = await docs.documents.get({
     documentId: '1YQ2y6UYsxR_Ft9y_Zx-Xn6oMBGVXVQmYbI6HA6OOuo8',
   });
-  console.log(`The title of the document is: ${res.data.title}`);
 }
 
 export async function textReplacement(documentId,text,newText) {
@@ -93,7 +92,6 @@ export async function getDocData(documentId){
 
   // The full document object
   const document = response.data;
-  console.log(document);
   return document;
 
 }
@@ -104,7 +102,6 @@ export async function getDocTextString(documentId){
   // let text = '';
   // await startServerWithJSON(content);
   // content.forEach(element => {
-  //   console.log(element)
   //   if (element.paragraph) {
   //     element.paragraph.elements.forEach(paragraphElement => {
   //       if (paragraphElement.textRun && paragraphElement.textRun.content) {
@@ -115,12 +112,10 @@ export async function getDocTextString(documentId){
   //   if (element.table) {
   //     element.table.tableRows.forEach(tableRowsElement => {
   //       if (tableRowsElement.content) {
-  //         console.log(tableRowsElement.content);
   //         text += tableRowsElement.content;
   //       }
   //     });
   //   }
-  //   console.log("element.sectionBreak:",element.sectionBreak)
   // });
   return JSON.stringify(content);
 }
@@ -167,7 +162,6 @@ export async function downloadDocxFromGoogleDocs(googleDocsUrl, outputFolder) {
   const downloadUrl = `https://docs.google.com/document/d/${fileId}/export?format=docx`;
   
   try {
-    console.log("downloadUrl",downloadUrl)
     // Make a request to download the file
     // const response = await axios.get(downloadUrl, { responseType: 'stream' });
 

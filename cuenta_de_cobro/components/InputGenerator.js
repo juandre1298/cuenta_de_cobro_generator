@@ -9,7 +9,6 @@ const InputGenerator = ({ inputList }) => {
 
   const handleSubmitRequest = async (e) => {
     e.preventDefault();
-    console.log(requestData);
     changeDocText(docURL,requestData);
   };
 
