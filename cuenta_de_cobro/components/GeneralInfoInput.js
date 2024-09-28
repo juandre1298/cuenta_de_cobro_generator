@@ -3,9 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { getInputList } from '../services/doc_service';
 import InputGenerator from './InputGenerator';
-import { driveURLIdExtractor, generateRandomId } from '../services/helper';
+import { driveURLIdExtractor, generateRandomId, scssST } from '../services/helper';
 import { useGeneraldocContext } from '../contexts/docContext';
-import st from "../styles/global.module.scss"
 
 
 const GeneralInfoInput = () => {
@@ -107,7 +106,7 @@ const GeneralInfoInput = () => {
             </li>
           ))}
         </ul>
-        <div className={[st.otherFileSelction].join(" ")}>
+        <div className={scssST("otherFileSelction")}>
           <label>Otro:</label>
           <div>
             <label>Nombre:</label>
@@ -131,29 +130,30 @@ const GeneralInfoInput = () => {
             <button onClick={handleAddOther}>Añadir</button>  
           </div>
         </div>
-        <label>Documentos a generar:</label>
-        <table>
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Título</th>
-              <th>Link</th>
-              <th>Eliminar</th>
-            </tr>
-          </thead>
-          <tbody>
-            {docList.map((e, i) => (
-              <tr key={e.id}>
-                <td>{i + 1}</td>
-                <td>{e.title}</td>
-                <td><a href={e.link} target="_blank" rel="noopener noreferrer">link</a></td>
-                <td><button type="button" onClick={() => handleDeletButton(e.id)}>Eliminar</button></td>
+        <div className = {scssST("documentListSection")}>
+          <label>Documentos a generar:</label>
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Título</th>
+                <th>Link</th>
+                <th>Eliminar</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div></div>
-        <input type="submit" value="Crear" />
+            </thead>
+            <tbody>
+              {docList.map((e, i) => (
+                <tr key={e.id}>
+                  <td>{i + 1}</td>
+                  <td><a href={`#iframe-${e.id}`}>{e.title}</a></td>
+                  <td><a href={e.link} target="_blank" rel="noopener noreferrer">link</a></td>
+                  <td><button type="button" onClick={() => handleDeletButton(e.id)}>Eliminar</button></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <input type="submit" value="Crear" />
+        </div>
       </form>
       {inputList.length > 0 && <InputGenerator inputList={inputList} />}
     </div>

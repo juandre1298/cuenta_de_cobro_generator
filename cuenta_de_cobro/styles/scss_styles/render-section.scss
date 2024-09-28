@@ -1,7 +1,23 @@
+
 .result_section{
-  max-width: 850px;
+  padding: 48px 0;
   overflow: auto;
-  iframe{
+  .editDoctSection{
     width: 100%;
+    h2{
+      text-align: center;
+    };
+    .editDoctContainer{
+      display: flex;
+      gap: 64px;
+    }
+    iframe{
+      width: 100%;
+      max-width: 850px;
+      height: 100vh;
+    }
+
   }
+
+
 }
