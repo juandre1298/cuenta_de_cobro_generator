@@ -25,3 +25,35 @@ export async function startServerWithJSON(jsonElement, port = 4000) {
         console.error(`Failed to start server: ${err.message}`);
     }
 }
+
+export function extractKeysFromJSON(jsonData) {
+  const extractedData = [];
+  const pattern = /\{\{(.*?)\}\}/g;
+
+  function searchContent(element) {
+      if (typeof element === 'object' && element !== null) {
+          if (Array.isArray(element)) {
+              for (const item of element) {
+                  searchContent(item);
+              }
+          } else {
+              for (const [key, value] of Object.entries(element)) {
+                  if (typeof value === 'string') {
+                      const matches = value.match(pattern);
+                      if (matches) {
+                          matches.forEach(match => {
+                              const key = match.slice(2, -2); // Extract key from {{key}}
+                              extractedData.push(key.trim());
+                          });
+                      }
+                  } else {
+                      searchContent(value);
+                  }
+              }
+          }
+      }
+  }
+
+  searchContent(jsonData);
+  return extractedData;
+}

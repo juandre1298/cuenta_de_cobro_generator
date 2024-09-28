@@ -1,16 +1,10 @@
 
-import {authorize, printDocTitle ,textReplacement, makeACopy, getDocTextString} from "../helpers/googleHelpers"
+import { extractKeysFromJSON } from "../helpers/generalHelpers";
+import {authorize, printDocTitle ,textReplacement, makeACopy, getDocTextString, getDocData} from "../helpers/googleHelpers"
 
 export async function getInputList(documentId){
-  const text = await getDocTextString(documentId);
-  const regex = /\{\{(.*?)\}\}/g; // Regular expression to match {{stringExample}}
-  const matches = [];
-  let match;
-  while ((match = regex.exec(text)) !== null) {
-    if(!matches.includes(match[1])){
-      matches.push(match[1]); // Capture the text inside {{ and }}
-    }
-  }
+  const doc = await getDocData(documentId);
+  const matches = extractKeysFromJSON(doc.body.content);
   return matches;
 }
 export async function replaceContent(documentId, replacementData) {

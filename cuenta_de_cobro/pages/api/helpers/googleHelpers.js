@@ -1,10 +1,6 @@
 import fs from 'fs';
-import path from 'path';
 import {google} from "googleapis";
 import apikeys from "./../apikey.json"
-import { embedStyleMap } from 'mammoth';
-const http = require('http');
-import { startServerWithJSON } from './generalHelpers';
 
 const SCOPE = ["https://www.googleapis.com/auth/", 'https://www.googleapis.com/auth/documents' ];
 
