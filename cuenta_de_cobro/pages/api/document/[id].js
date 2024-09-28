@@ -1,5 +1,5 @@
 
-import { getInputList } from "../../services/generaringDoc";
+import { getInputList, replaceContent } from "../services/generaringDoc";
 
 export default async function handler(req, res) {
   const { id } = req.query;
@@ -17,6 +17,18 @@ export default async function handler(req, res) {
       }
     break
     case 'PUT':
+      try {
+        const requestData=req.body;
+        console.log("put request",requestData)
+        const inputList = await replaceContent(id,requestData);
+        if(inputList){
+          res.status(200).json({ message: 'successfull.' });
+        }else{
+          res.status(404).json({ message: 'replacement error' });
+        }
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
       break;
     case 'POST':
       break;

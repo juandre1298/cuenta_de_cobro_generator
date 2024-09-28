@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       // }
       // const uploadResp = await uploadFile(fileInfo,authResp);
       // console.log(uploadResp)
-      // await replaceText(authResp);
+      // await textReplacement(authResp);
       // const copyInfo = await makeAcopy("1YQ2y6UYsxR_Ft9y_Zx-Xn6oMBGVXVQmYbI6HA6OOuo8","NEW COPY");
       // console.log(copyInfo);
 

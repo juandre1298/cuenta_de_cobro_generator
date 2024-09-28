@@ -1,10 +1,29 @@
 export async function getInputList(documentId) {
   try {
-    const response = await fetch('/api/document/inputs/'+documentId, {
+    const response = await fetch('/api/document/'+documentId, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
+    });
+
+    const data = await response.json();
+    return data.inputList;
+
+  } catch (error) {
+    console.error('Error getting inputs:', error);
+    alert('Error getting inputs. Check console for details.');
+  }
+}
+
+export async function changeDocText(documentId, requestData) {
+  try {
+    const response = await fetch('/api/document/'+documentId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(requestData)
     });
 
     const data = await response.json();

@@ -2,6 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import {google} from "googleapis";
 import apikeys from "./../apikey.json"
+import { embedStyleMap } from 'mammoth';
+const http = require('http');
+import { startServerWithJSON } from './generalHelpers';
 
 const SCOPE = ["https://www.googleapis.com/auth/", 'https://www.googleapis.com/auth/documents' ];
 
@@ -48,7 +51,7 @@ export async function printDocTitle(auth = authResp) {
   console.log(`The title of the document is: ${res.data.title}`);
 }
 
-export async function replaceText(documentId,text,replaceText) {
+export async function textReplacement(documentId,text,newText) {
   const authResp = await authorize();
   
   const docs = google.docs({version: 'v1', auth: authResp});
@@ -56,10 +59,10 @@ export async function replaceText(documentId,text,replaceText) {
     {
       replaceAllText: {
         containsText: {
-          text,
+          text: text,
           matchCase: true,
         },
-        replaceText,
+        replaceText: newText,
       },
     },
   ];
@@ -94,7 +97,7 @@ export async function getDocData(documentId){
 
   // The full document object
   const document = response.data;
-
+  console.log(document);
   return document;
 
 }
@@ -102,17 +105,28 @@ export async function getDocData(documentId){
 export async function getDocTextString(documentId){
   const doc = await getDocData(documentId);
   let content = doc.body.content;
-  let text = '';
-  content.forEach(element => {
-    if (element.paragraph) {
-      element.paragraph.elements.forEach(paragraphElement => {
-        if (paragraphElement.textRun && paragraphElement.textRun.content) {
-          text += paragraphElement.textRun.content;
-        }
-      });
-    }
-  });
-  return text;
+  // let text = '';
+  // await startServerWithJSON(content);
+  // content.forEach(element => {
+  //   console.log(element)
+  //   if (element.paragraph) {
+  //     element.paragraph.elements.forEach(paragraphElement => {
+  //       if (paragraphElement.textRun && paragraphElement.textRun.content) {
+  //         text += paragraphElement.textRun.content;
+  //       }
+  //     });
+  //   }
+  //   if (element.table) {
+  //     element.table.tableRows.forEach(tableRowsElement => {
+  //       if (tableRowsElement.content) {
+  //         console.log(tableRowsElement.content);
+  //         text += tableRowsElement.content;
+  //       }
+  //     });
+  //   }
+  //   console.log("element.sectionBreak:",element.sectionBreak)
+  // });
+  return JSON.stringify(content);
 }
 
 export async function uploadFile(fileInfo, parentsId="1HkeNr5RRtESIrrAsG9SC2tZNfzMEMIfp"){

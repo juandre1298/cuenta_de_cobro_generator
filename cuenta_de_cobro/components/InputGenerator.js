@@ -1,19 +1,43 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import { handleDownload } from '../services/doc_service.js';
+"use client";
+import React, { useState } from 'react';
+import { changeDocText } from '../services/doc_service';
+import { useGeneraldocContext } from '../contexts/docContext';
 
 const InputGenerator = ({ inputList }) => {
+  const [requestData, setRequestData] = useState({});
+  const {docURL}=useGeneraldocContext();  
+
+  const handleSubmitRequest = async (e) => {
+    e.preventDefault();
+    console.log(requestData);
+    changeDocText(docURL,requestData);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRequestData(prevRequest => ({
+      ...prevRequest,
+      [name]: value
+    }));
+  };
 
   return (
-    <div>
+    <form onSubmit={handleSubmitRequest}>
       {inputList.length > 0 &&
-        inputList.map((e,i) =>(<div>
-          {console.log(i+" element "+e)}
-          {e}
-        </div>)
-        )
+        inputList.map((e, i) => (
+          <label key={i}>
+            {e}
+            <input
+              type="text"
+              name={e}
+              value={requestData[e] || ''}
+              onChange={handleChange}
+            />
+          </label>
+        ))
       }
-    </div>
+      <input type="submit" />
+    </form>
   );
 };
 
