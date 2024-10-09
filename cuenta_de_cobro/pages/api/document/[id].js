@@ -1,4 +1,5 @@
 
+import { fileRequestController } from "../controllers/fileController";
 import { getInputList, replaceContent } from "../services/generaringDoc";
 
 export default async function handler(req, res) {
@@ -30,6 +31,14 @@ export default async function handler(req, res) {
       }
       break;
     case 'POST':
+      try {
+        const {options, requestData}=req.body;
+        const answer = await fileRequestController(id,options,requestData)
+        res.status(200).json({ message: 'successfull.', answer });
+     
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
       break;
     case 'DELETE':
       break;

@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { useGeneraldocContext } from '../contexts/docContext';
 import { driveURLIdExtractor, scssST } from '../services/helper';
-import { changeDocText } from '../services/doc_service';
+import { newDocGeneratorFromTempolate } from '../services/doc_service';
 
 
 const DocDisplay = () => {
   const { docList }=useGeneraldocContext();
   useEffect(()=>{
     console.log("docList:",docList)
-  },docList)
+  },[docList])
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -20,9 +20,16 @@ const DocDisplay = () => {
         inputValues[element.id] = element.value;
       }
     });
+
+    const options = {
+      createNewFile: true,
+      newFileData:{
+        newFileName: "NUEVO FILE",
+      } 
+    };
     
     console.log(inputValues);
-    await changeDocText(driveURLIdExtractor(inputValues.documentLink), inputValues);
+    await newDocGeneratorFromTempolate(driveURLIdExtractor(inputValues.documentLink), options, inputValues);
   }
 
 
@@ -41,7 +48,7 @@ const DocDisplay = () => {
                     <input type="hidden" id="documentLink" value={docElement.link} />
                     {docElement.listOfInputs.map( (inputKey, i)=>{
                       return <p key={i}>
-                          <label for={inputKey}>{inputKey}: </label>
+                          <label htmlFor={inputKey}>{inputKey}: </label>
                           <input id={inputKey} type="text"/> 
                         </p>
                     })}

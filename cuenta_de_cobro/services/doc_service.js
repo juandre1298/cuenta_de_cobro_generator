@@ -37,6 +37,7 @@ export async function changeDocText(documentId, requestData) {
 
 export function downloadDocxFromGoogleDocs(googleDocsUrl) {
   // Extract the FILE_ID from the Google Docs URL
+
   const fileIdMatch = googleDocsUrl.match(/\/document\/d\/(.*?)\/edit/);
   
   if (!fileIdMatch || !fileIdMatch[1]) {
@@ -82,5 +83,24 @@ export async function handleDownload(googleDocsUrl) {
   } catch (error) {
     console.error('Error downloading file:', error);
     alert('Error downloading file. Check console for details.');
+  }
+}
+
+export async function newDocGeneratorFromTempolate(documentId, options, requestData) {
+  try {
+    const response = await fetch('/api/document/'+documentId, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify({options, requestData})
+    });
+
+    const data = await response.json();
+    return data.inputList;
+
+  } catch (error) {
+    console.error('Error getting inputs:', error);
+    alert('Error getting inputs. Check console for details.');
   }
 }

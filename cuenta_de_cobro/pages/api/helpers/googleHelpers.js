@@ -61,13 +61,18 @@ export async function textReplacement(documentId,text,newText) {
       },
     },
   ];
-  const res = await docs.documents.batchUpdate({
-    documentId,
-    requestBody:{
-      requests,
-    }
-  });  
-  return res
+  try{
+    const res = await docs.documents.batchUpdate({
+      documentId,
+      requestBody:{
+        requests,
+      }
+    });  
+    return res
+  }catch(error){
+    console.log(error)
+  }
+
 }
 
 export async function makeACopy(sourceDocumentId,newDocumentName){
